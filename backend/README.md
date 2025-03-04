@@ -38,59 +38,86 @@ Este proyecto implementa un backend serverless que rastrea y almacena informaci�
 ### Flujo de Datos
 
 ```mermaid
-    graph TD;
-    A[Frontend ECS Fargate] -->|GET /launches| B(API Gateway);
-    A -->|GET /rockets| B;
-    A -->|GET /launches/id| B;
-    A -->|GET /launchpads| B;
-    B -->|Rutas GET| C["Lambda Query<br>(SpaceXAPI)"];
-    C --> D[(DynamoDB<br>SpaceXLaunches<br>SpaceXRockets<br>SpaceXLaunchpads)];
-    E["Lambda Ingestión<br>(Launches)"] -->|Actualización cada 6h| F[API Space X<br>v4/launches];
-    E -->|Escribe| D;
-    G[CloudWatch Events] -->|Programador cada 6h| E;
-    H["Lambda Ingestión<br>(Static Data)"] -->|Carga inicial| F;
-    H -->|Escribe| D;
+    graph TD
+    subgraph Frontend Layer
+        A[ECS Fargate Frontend]
+    end
+
+    subgraph API Layer
+        B(API Gateway)
+    end
+
+    subgraph Business Logic Layer
+        C["Lambda Query<br>(SpaceXAPI)"]
+        E["Lambda Ingestión<br>(Launches)"]
+        H["Lambda Ingestión<br>(Static Data)"]
+    end
+
+    subgraph Data Layer
+        D[(DynamoDB<br>SpaceXLaunches<br>SpaceXRockets<br>SpaceXLaunchpads)]
+    end
+
+    subgraph External Services
+        F[SpaceX API v4/launches]
+    end
+
+    subgraph Scheduling
+        G[CloudWatch Events]
+    end
+
+    A -->|GET /launches, /rockets, /launchpads, /launches/id| B
+    B -->|Rutas GET| C
+    C -->|Read| D
+    G -->|Programador cada 6h| E
+    E -->|Actualización cada 6h| F
+    E -->|Write| D
+    H -->|Carga inicial| F
+    H -->|Write| D
 
     classDef front fill:#e1f5fe,stroke:#039be5,color:#000;
     classDef aws fill:#f0f4c3,stroke:#827717,color:#000;
     classDef db fill:#ffcdd2,stroke:#c62828,color:#000;
     classDef api fill:#c8e6c9,stroke:#2e7d32,color:#000;
+    classDef schedule fill:#bbdefb,stroke:#1565c0,color:#000;
+    classDef external fill:#c8e6c9,stroke:#2e7d32,color:#000;
 
     class A front;
     class B api;
     class C,E,H aws;
     class D db;
+    class G schedule;
+    class F external;
 ```
 
 ### Diagrama Detallado de AWS
 
 ```mermaid
 flowchart TB
-    subgraph Frontend["Frontend Layer"]
+    subgraph Frontend Layer
         FG[ECS Fargate Container]
     end
 
-    subgraph Api["API Layer"]
+    subgraph API Layer
         APIG[API Gateway]
     end
 
-    subgraph Logic["Business Logic Layer"]
-        LQ[Lambda SpaceXAPI<br>Query Service] 
+    subgraph Business Logic Layer
+        LQ[Lambda SpaceXAPI<br>Query Service]
         LI[Lambda Launches<br>Data Update Service]
         LS[Lambda Static Data<br>Initial Load Service]
     end
 
-    subgraph Data["Data Layer"]
+    subgraph Data Layer
         DB1[(DynamoDB<br>SpaceXLaunches)]
         DB2[(DynamoDB<br>SpaceXRockets)]
         DB3[(DynamoDB<br>SpaceXLaunchpads)]
     end
 
-    subgraph Schedule["Scheduling"]
+    subgraph Scheduling
         CWE[CloudWatch Events]
     end
 
-    subgraph External["External Services"]
+    subgraph External Services
         SAPI[SpaceX API v4]
     end
 
@@ -109,11 +136,33 @@ flowchart TB
     classDef aws fill:#FF9900,stroke:#232F3E,color:black,stroke-width:2px;
     classDef frontend fill:#1976D2,stroke:#0D47A1,color:white,stroke-width:2px;
     classDef external fill:#4CAF50,stroke:#2E7D32,color:white,stroke-width:2px;
-    
+
     class APIG,LQ,LI,LS,DB1,DB2,DB3,CWE aws;
     class FG frontend;
     class SAPI external;
 ```
+
+### Diagrama de Secuencia: Consulta de Lanzamiento Individual con Manejo de Errores
+```mermaid
+    sequenceDiagram
+    participant Frontend
+    participant API Gateway
+    participant Lambda Query
+    participant DynamoDB
+
+    Frontend->>API Gateway: GET /launches/{id}
+    API Gateway->>Lambda Query: Invoca con {id}
+    Lambda Query->>DynamoDB: GetItem(id)
+    DynamoDB-->>Lambda Query: Item (o null)
+    alt Item encontrado
+        Lambda Query->>API Gateway: Respuesta 200 con Item
+        API Gateway-->>Frontend: JSON con datos del Item
+    else Item no encontrado
+        Lambda Query->>API Gateway: Respuesta 404 con mensaje de error
+        API Gateway-->>Frontend: JSON con error: "Lanzamiento con ID {id} no encontrado"
+    end
+```
+
 
 ### Componentes de AWS en Detalle
 
@@ -397,7 +446,7 @@ pytest lambdas/
 # Ejecutar pruebas específicas
 pytest lambdas/api/tests/
 pytest lambdas/ingestion/launches/tests/
-pytest lambdas/ingestion/static\ data/tests/
+pytest lambdas/ingestion/static data/tests/
 ```
 
 ## 👨‍💻 Autor
