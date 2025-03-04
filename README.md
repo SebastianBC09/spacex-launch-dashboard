@@ -1,2 +1,2 @@
-URL: http://spacex-alb-1125436484.us-east-1.elb.amazonaws.com/
+PUBLIC API: http://54.211.69.43/
 API URl: https://yvbhy6682b.execute-api.us-east-1.amazonaws.com/prod/...
