@@ -12,18 +12,18 @@ _Aplicación web moderna que visualiza y explora los lanzamientos de SpaceX con 
 ---
 
 ##  Tabla de Contenidos
-1. [Descripcion del Proyecto](#-descripcion-del-proyecto)
-2. [Características Principales](#caracteristicas-principales)
-3. [Estructura del Proyecto](#estructura-del-proyecto)
-4. [Tecnologías y Dependencias](#tecnologías-y-dependencias)
-5. [Configuración y Despliegue](#configuración-y-despliegue)
+1. [Descripción del Proyecto](#-descripcion-del-proyecto)
+2. [Características Principales](-#caracteristicas-principales)
+3. [Estructura del Proyecto](#-estructura-del-proyecto)
+4. [Tecnologías y Dependencias](#-tecnologias-y-dependencias)
+5. [Configuración y Despliegue](#-configuracion-y-despliegue)
     - [Desarrollo Local](#desarrollo-local)
     - [Construcción de la Imagen Docker](#construcción-de-la-imagen-docker)
     - [Despliegue en ECS Fargate](#despliegue-en-ecs-fargate)
-6. [Diagramas de Arquitectura](#diagramas-de-arquitectura)
-7. [Componentes Principales](#componentes-principales)
-8. [Autor](#autor)
-9. [Licencia](#licencia)
+6. [Diagramas de Arquitectura](#-diagramas-de-arquitectura)
+7. [Componentes Principales](#-componentes-principales)
+8. [Autor](#-autor)
+9. [Licencia](#-licencia)
 
 ## 📝 Descripcion del Proyecto
 
