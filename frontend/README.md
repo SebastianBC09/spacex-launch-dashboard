@@ -12,11 +12,11 @@ _Aplicación web moderna que visualiza y explora los lanzamientos de SpaceX con 
 ---
 
 ##  Tabla de Contenidos
-1. [Descripción del Proyecto](#-descripcion-del-proyecto)
-2. [Características Principales](-#caracteristicas-principales)
+1. [Descripción del Proyecto](#-descripción-del-proyecto)
+2. [Características Principales](#-características-principales)
 3. [Estructura del Proyecto](#-estructura-del-proyecto)
-4. [Tecnologías y Dependencias](#-tecnologias-y-dependencias)
-5. [Configuración y Despliegue](#-configuracion-y-despliegue)
+4. [Tecnologías y Dependencias](#-tecnologías-y-dependencias)
+5. [Configuración y Despliegue](#-configuración-y-despliegue)
     - [Desarrollo Local](#desarrollo-local)
     - [Construcción de la Imagen Docker](#construcción-de-la-imagen-docker)
     - [Despliegue en ECS Fargate](#despliegue-en-ecs-fargate)
@@ -25,7 +25,7 @@ _Aplicación web moderna que visualiza y explora los lanzamientos de SpaceX con 
 8. [Autor](#-autor)
 9. [Licencia](#-licencia)
 
-## 📝 Descripcion del Proyecto
+## 📝 Descripción del Proyecto
 
 Este proyecto implementa una aplicación web frontend moderna y responsiva para visualizar y explorar los lanzamientos de SpaceX. Utiliza React, Tailwind CSS, Zustand y React Query para proporcionar una experiencia de usuario fluida y eficiente. La aplicación se conecta al backend serverless para obtener datos actualizados y se despliega en AWS ECS Fargate para garantizar alta disponibilidad y escalabilidad.
 
