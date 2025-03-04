@@ -402,11 +402,10 @@ pytest lambdas/ingestion/static\ data/tests/
 
 ## 👨‍💻 Autor
 
-**Tu Nombre** - *Backend Developer* - [tu-github](https://github.com/tu-github)
+**Sebastian Ballen C** - *Frontend Developer*
 
-* LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
-* Email: tu.email@ejemplo.com
-* Portfolio: [tu-portfolio.com](https://tu-portfolio.com)
+* LinkedIn: [Sebastian B.](www.linkedin.com/in/sebastianballencastaneda-softwaredeveloper)
+* Email: sebastian.ballenc@gmail.com
 
 ## 📄 Licencia
 
