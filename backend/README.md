@@ -12,16 +12,16 @@ _Sistema serverless para seguimiento de lanzamientos de SpaceX con arquitectura 
 ---
 
 ## 📋 Tabla de Contenidos
-1. [Descripción del Proyecto](#descripción-del-proyecto)
-2. [Diagramas de Arquitectura](#diagramas-de-arquitectura)
-3. [Configuración de DynamoDB](#configuración-de-dynamodb)
-4. [Funciones Lambda](#funciones-lambda)
-5. [API Endpoints](#api-endpoints)
-6. [Estructura del Proyecto](#estructura-del-proyecto)
-7. [Despliegue](#despliegue)
-8. [Pruebas Unitarias](#pruebas-unitarias)
-9. [Autor](#autor)
-10. [Licencia](#licencia)
+1. [Descripción del Proyecto](#-descripción-del-proyecto)
+2. [Diagramas de Arquitectura](#-diagramas-de-arquitectura)
+3. [Configuración de DynamoDB](#-configuración-de-dynamodb)
+4. [Funciones Lambda](#-funciones-lambda)
+5. [API Endpoints](#-api-endpoints)
+6. [Estructura del Proyecto](#-estructura-del-proyecto)
+7. [Despliegue](#-despliegue)
+8. [Pruebas Unitarias](#-pruebas-unitarias)
+9. [Autor](#-autor)
+10. [Licencia](#-licencia)
 
 ## 📝 Descripción del Proyecto
 
